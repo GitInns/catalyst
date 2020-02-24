@@ -1,15 +1,15 @@
-import {bindEvents, register, target, assertTargets} from './helpers'
-
-@register
-@assertTargets
-@bindEvents
-class HelloController extends HTMLElement {
-  @target outputTarget!: HTMLElement;
-  @target nameTarget!: HTMLInputElement;
-  @target buttonTarget!: HTMLButtonElement;
-
-  greet() {
-    this.dataset.foo = 'foo'
-    this.outputTarget.textContent = `Hello, ${this.nameTarget.value}!`;
+/**
+ * Register the controller as a custom element.
+ *
+ * The classname is converted to a approriate tag name.
+ *
+ * Example: HelloController => hello-controller
+ */
+export function register(classObject: Function) {
+  const name = classObject.name.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase()
+  if (!window.customElements.get(name)) {
+    // @ts-ignore
+    window[classObject.name] = classObject;
+    window.customElements.define(name, classObject);
   }
 }
