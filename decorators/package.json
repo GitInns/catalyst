@@ -8,7 +8,7 @@
     "Keith Cirkel (https://keithcirkel.co.uk/)",
     "Kristján Oddsson <koddsson@gmail.com>"
   ],
-  "main": "dist/index.esm.js",
+  "main": "dist/index.js",
     "files": [
     "dist"
   ],
