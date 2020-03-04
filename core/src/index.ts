@@ -1,15 +1,5 @@
-/**
- * Register the controller as a custom element.
- *
- * The classname is converted to a approriate tag name.
- *
- * Example: HelloController => hello-controller
- */
-export function register(classObject: Function) {
-  const name = classObject.name.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase()
-  if (!window.customElements.get(name)) {
-    // @ts-ignore
-    window[classObject.name] = classObject;
-    window.customElements.define(name, classObject);
-  }
-}
+import {bind} from './bind'
+import {register} from './register'
+import {findTarget, findTargets} from './findtarget'
+
+export {bind, register, findTarget, findTargets}

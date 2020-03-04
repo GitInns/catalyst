@@ -1,4 +1,3 @@
-import {dasherize} from './dasherize'
 /**
  * Register the controller as a custom element.
  *
@@ -6,9 +5,15 @@ import {dasherize} from './dasherize'
  *
  * Example: HelloController => hello-controller
  */
-export function register(classObject: any) {
-  const name = dasherize(classObject.name)
+
+interface CustomElement {
+  new(): HTMLElement
+}
+
+export function register(classObject: CustomElement) {
+  const name = classObject.name.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase()
   if (!window.customElements.get(name)) {
+    // @ts-ignore
     window[classObject.name] = classObject;
     window.customElements.define(name, classObject);
   }
